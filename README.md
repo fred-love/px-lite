@@ -2,14 +2,14 @@
 
 # PX-Lite alpha
 
-PX-Lite aggregates the storage capacity of hard drives on your server and it clusters multiple servers for high availability. As you develop and deploy your apps in containers, use PX-Lite for elastic storage capacity, managed performance, and high availability.
+PX-Lite aggregates the storage capacity of hard drives on your server and clusters multiple servers for high availability. As you develop and deploy your apps in containers, use PX-Lite for elastic storage capacity, managed performance, and high availability.
 
 ### See our quick-start guides on running PX-Lite for scenarios such as:
 -	Hosting WordPress with persistent storage
 -	Scaling a Cassandra database
 -	Running the Docker registry with high availability
 
-Use our command-line tools to directly manage volumes, such as snapshotting a container’s storage.  We will add docs to our RESTful interface soon.
+Use our command-line tools to directly manage volumes, such as snapshotting a container’s storage. We will add docs to our RESTful interface soon.
 
 *Stay tuned for updates on PX-Lite and our PX-Enterprise release.*
 
@@ -18,18 +18,18 @@ Use our command-line tools to directly manage volumes, such as snapshotting a co
 ## How it works...
 Portworx storage is deployed as a container and runs on a cluster of servers. Application containers provision storage directly through the Docker [*volume plugins*](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f)  API or the Docker [*command-line*](https://docs.docker.com/engine/reference/commandline/volume_create/). 
 
-Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (`pxctl`) and then set storage policies using the Portworx administrative interface.  Using `pxctl`, administrators can set container granular snapshot policies, create clones of volumes and set CoS parameters.
+Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (`pxctl`) and then set storage policies using the Portworx administrative interface. Using `pxctl`, administrators can set container granular snapshot policies, create clones of volumes and set CoS parameters.
 
 ### Portworx storage runs in a cluster of server nodes.
 -   Each server has the PX-Lite container and the Docker daemon.
 -   Servers join a cluster and share config through the key/value store, such as etcd.
--   The PX-Lite container pools the capacity of the storage media residing on the server.  You easily select storage media through the config.json file.
+-   The PX-Lite container pools the capacity of the storage media residing on the server. You easily select storage media through the config.json file.
 
 See [*Deployment Requirements*](#requirements-and-limitations) for compatibility requirements.
 
 ![](http://i.imgur.com/OWOedkS.png)
 
-Storage volumes are thinly provisioned, using capacity only as an application consumes it.  Volumes are replicated across the nodes within the cluster, per a volume’s configuration, to ensure high availability.
+Storage volumes are thinly provisioned, using capacity only as an application consumes it. Volumes are replicated across the nodes within the cluster, per a volume’s configuration, to ensure high availability.
 
 Using MySQL as an example, a PX-Lite storage cluster has the following characteristics:
 
@@ -108,7 +108,7 @@ Here is a sample config.json file.
 }
 ```  
   
-In the configuration file, make the `clusterid` unique among clusters in your key-value store.  Point the `devices` to local unused block device on your system, for example /dev/sdb. 
+In the configuration file, make the `clusterid` unique among clusters in your key-value store. Point the `devices` to local unused block device on your system, for example /dev/sdb. 
 
       Warning!!!: Any storage device that PX-Lite uses will be reformatted.
 
@@ -126,7 +126,7 @@ To find local drives that are available for use on your system, you can issue th
 # fdisk -l
 ```
 
-*Warning: Please ensure that disks are empty, to avoid data loss!*                                                                                                                                                                 
+*Warning: Please ensure that disks are empty to avoid data loss!*                                                                                                                                                                 
  
 ### Step 4: Running PX-Lite
 
@@ -296,11 +296,11 @@ It is highly recommended that you run PX-Lite on a system with at least 4GB RAM.
 |---------------|---------|
 |Kernel Version|3.10 or higher|
 |Docker Version|1.10 or higher|
-|KV Database|Etcd 2.0 or higher.  See https://github.com/coreos/etcd or try a hosted version at https://compose.io/etcd/|
+|KV Database|Etcd 2.0 or higher. See https://github.com/coreos/etcd or try a hosted version at https://compose.io/etcd/|
 |CPU|4 cores recommended|
 |Memory|4GB Minimum|
 |Cloud|If running in the cloud, AWS Ubuntu 14.04 LTS (HVM) CentOS7 with Updates HVM|
-|systemd|If using systemd, Docker should NOT be set to MountFlags=slave.  PX-Lite exports mount points and requires shared mount flags.  Tracking [Docker issue 19625](https://github.com/docker/docker/issues/19625).|
+|systemd|If using systemd, Docker should NOT be set to MountFlags=slave. PX-Lite exports mount points and requires shared mount flags.  Tracking [Docker issue 19625](https://github.com/docker/docker/issues/19625).|
 
 MountFlag value is in: 
 /usr/lib/systemd/system/docker.service 
